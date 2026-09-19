@@ -1,7 +1,7 @@
 {
   "product": "Барометр психосоціальної безпеки робочого середовища",
   "version": "1.0",
-  "generatedAt": "2026-09-19T19:32:16.877Z",
+  "generatedAt": "2026-09-19T19:45:08.212Z",
   "files": [
     {
       "path": ".nojekyll",
@@ -30,8 +30,8 @@
     },
     {
       "path": "downloads/barometr-local-1.0.html",
-      "bytes": 1221435,
-      "sha256": "7f3ee7f655b8acf22fafebf44fd699a6f6857fb1c791b669f727356f8a95599b"
+      "bytes": 1538524,
+      "sha256": "5de78f9ee5ce373ca49e3ee87a51d5026b96aab4b4c895196c46c37a5ecbd604"
     },
     {
       "path": "downloads/Інструкція для власника дослідження.docx",
