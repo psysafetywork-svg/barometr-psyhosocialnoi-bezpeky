@@ -1404,6 +1404,14 @@ function normalizeProject(obj){
     p.p=p.p||{answers:{},notes:{},completedAt:null,results:null,needsRecalc:false};
     p.p.answers=p.p.answers||{};p.p.notes=p.p.notes||{};
   });
+  obj.environments.forEach(e=>{
+    const saved=e.defaultPopulation;
+    const firstKnown=obj.periods.map(p=>p.populations?.[e.id]).find(Boolean);
+    e.defaultPopulation={
+      employees:Number(saved?.employees??firstKnown?.employees??0),
+      managersInvited:Number(saved?.managersInvited??firstKnown?.managersInvited??0)
+    };
+  });
   return obj;
 }
 function enterProject(){
@@ -1462,7 +1470,7 @@ function renderOverview(){
 }
 function renderSetup(){
   const envRows=project.environments.map(e=>{
-    const pop=periodObj()?.populations?.[e.id];
+    const pop=periodObj()?.populations?.[e.id]||e.defaultPopulation;
     return '<div class="setup-row"><div><strong>'+h(e.name)+'</strong><span class="small muted">'+h(e.description||'Без опису')+(pop?' · Працівників: '+pop.employees+' · Керівників: '+pop.managersInvited:'')+'</span></div><button class="btn ghost small" data-select-env="'+h(e.id)+'">Вибрати</button></div>';
   }).join('');
   const periodRows=project.periods.map(p=>'<div class="setup-row"><div><strong>'+h(p.label)+'</strong><span class="small muted">'+fmtDate(p.start)+' – '+fmtDate(p.end)+' · завершення вимірювання: '+fmtDate(p.measurementEnd)+'</span></div><button class="btn ghost small" data-select-period="'+h(p.id)+'">Вибрати</button></div>').join('');
@@ -1476,7 +1484,7 @@ function addEnvironment(){
   const name=$('#env-name').value.trim(),description=$('#env-description').value.trim();
   const employees=Number($('#env-employees').value),managers=Number($('#env-managers').value);
   if(!name||!Number.isFinite(employees)||employees<1||!Number.isFinite(managers)||managers<0){showToast('Заповніть обов’язкові поля коректно.');return}
-  const env={id:id('env'),name,description}; project.environments.push(env);
+  const env={id:id('env'),name,description,defaultPopulation:{employees,managersInvited:managers}}; project.environments.push(env);
   project.periods.forEach(p=>p.populations[env.id]={employees,managersInvited:managers});
   selectedEnv=env.id;setDirty();refreshContext();renderSetup();
   if(employees<20)showToast('У середовищі менше 20 працівників. Результати E можуть бути недоступні.');
@@ -1487,7 +1495,10 @@ function addPeriod(){
   if(!label||!start||!end||!measurementEnd){showToast('Заповніть усі поля періоду.');return}
   if(start>end||end>measurementEnd){showToast('Перевірте послідовність дат.');return}
   const p={id:id('period'),label,start,end,measurementEnd,instrumentVersion:VERSION,populations:{},results:{},p:{answers:{},notes:{},completedAt:null,results:null,needsRecalc:false}};
-  project.environments.forEach(e=>{p.populations[e.id]={employees:0,managersInvited:0}});
+  project.environments.forEach(e=>{
+    const defaults=e.defaultPopulation||{};
+    p.populations[e.id]={employees:Number(defaults.employees)||0,managersInvited:Number(defaults.managersInvited)||0};
+  });
   project.periods.push(p);selectedPeriod=p.id;setDirty();refreshContext();renderSetup();
   if(project.environments.length)showToast('Період додано. Вкажіть чисельність для кожного середовища.');
 }
@@ -1499,7 +1510,8 @@ function editPopulation(){
   if(managers===null)return;
   const e=Number(employees),m=Number(managers);
   if(!Number.isFinite(e)||e<1||!Number.isFinite(m)||m<0){showToast('Чисельність введено некоректно.');return}
-  periodObj().populations[selectedEnv]={employees:e,managersInvited:m};setDirty();renderSetup();
+  periodObj().populations[selectedEnv]={employees:e,managersInvited:m};
+  envObj().defaultPopulation={employees:e,managersInvited:m};setDirty();renderSetup();
 }
 function renderImport(){
   if(!readyContext()){ $('#view').innerHTML=head('Дані опитування','Імпорт <span class="accent">E/L</span>','Один файл містить відповіді всіх учасників.')+empty('Спочатку налаштуйте проєкт','Додайте робоче середовище і період.','<button class="btn primary" data-go="setup">До налаштувань</button>');return}
