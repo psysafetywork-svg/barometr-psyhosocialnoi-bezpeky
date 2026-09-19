@@ -1,0 +1,67 @@
+{
+  "product": "Барометр психосоціальної безпеки робочого середовища",
+  "version": "1.0",
+  "generatedAt": "2026-09-19T19:32:16.877Z",
+  "files": [
+    {
+      "path": ".nojekyll",
+      "bytes": 55,
+      "sha256": "3debe936018b449978112a8e0740a3610a534aaa010fa77c49f264f27b4d0464"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2547,
+      "sha256": "95218fede94ee445a5b8f33fa16f188ea344153d8ba1cb8b7318ca9d0007fb98"
+    },
+    {
+      "path": "THIRD-PARTY-NOTICES.md",
+      "bytes": 700,
+      "sha256": "223fac9c305da6859bb8073e02f3ad1844dd1785a12fc2ba186f21b8a252453f"
+    },
+    {
+      "path": "data-security.html",
+      "bytes": 3238,
+      "sha256": "b47cbd899170d334d85a0e688c0ed6b62e8f22e739be81cb3f948eaefaa774a1"
+    },
+    {
+      "path": "downloads/LICENSE-SheetJS-Apache-2.0.txt",
+      "bytes": 11356,
+      "sha256": "8f920142e9689d9a40768c63525beb7d40c2bee9dfa4d52c01c441a79e34a56f"
+    },
+    {
+      "path": "downloads/barometr-local-1.0.html",
+      "bytes": 1221435,
+      "sha256": "7f3ee7f655b8acf22fafebf44fd699a6f6857fb1c791b669f727356f8a95599b"
+    },
+    {
+      "path": "downloads/Інструкція для власника дослідження.docx",
+      "bytes": 44496,
+      "sha256": "df8eb41898c0be231c8b1b76456e7c6affcbaac437c6cd4fc0d224542678a5f2"
+    },
+    {
+      "path": "downloads/Інструкція для створення форми_опитування працівників і керівників.xlsx",
+      "bytes": 17371,
+      "sha256": "19e087d419d4314a9c5604e29c650f3e6b189e5eca602d844fe71eb273ea550a"
+    },
+    {
+      "path": "downloads/Технічна довідка з безпеки даних.docx",
+      "bytes": 40408,
+      "sha256": "4b65a1901707d495e306627423c250972c70ed697b6177ae680e89aae575d2d9"
+    },
+    {
+      "path": "index.html",
+      "bytes": 14602,
+      "sha256": "a137304a9189e8745a10ad730bd5092b0a92aa467a73c903bfbdd504174f31e2"
+    },
+    {
+      "path": "portal.css",
+      "bytes": 8230,
+      "sha256": "f7e217c2ff27e475d869531525c1565ebf264b9c92c80ae0f2bebf0e2f499e47"
+    },
+    {
+      "path": "portal.js",
+      "bytes": 6166,
+      "sha256": "d8074dc59fec31997ff59832a36b8c45150e2b6722228a84333a2820e7a1b99c"
+    }
+  ]
+}
